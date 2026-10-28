@@ -80,7 +80,7 @@ def classify_inner_outer(shapely_geometries,threshold_area):
                         outer_with_holes[parent_polygon].append(polygon)
 
         classified_contours[slice_key]={"outer":outer,"inner":inner,"outer_with_holes":outer_with_holes}
-    print(classified_contours.keys())
+    print(classified_contours)
     return classified_contours
 
 
