@@ -71,13 +71,13 @@ def classify_inner_outer(shapely_geometries,threshold_area):
 
         #polygons is original un-oriented list.so while checking need to check orientation also
 
-        for i,polygon in enumerate(polygons):
-                if orient(polygon,sign=-1) in inner:
-                    parent_polygon=orient(polygons[parent[i]],sign=1)
-                    if parent_polygon not in outer_with_holes:
-                        outer_with_holes[polygons[parent[i]]] = [polygon]
-                    else:
-                        outer_with_holes[parent_polygon].append(polygon)
+        for i,polygon in enumerate(valid_polygons):
+            if orient(polygon,sign=-1) in inner:
+                parent_polygon=orient(valid_polygons[parent[i]],sign=1)
+                if parent_polygon not in outer_with_holes:
+                    outer_with_holes[parent_polygon] = [orient(polygon,sign=-1)]
+                else:
+                    outer_with_holes[parent_polygon].append(orient(polygon,sign=-1))
 
         classified_contours[slice_key]={"outer":outer,"inner":inner,"outer_with_holes":outer_with_holes}
     print(classified_contours)
